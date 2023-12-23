@@ -2,34 +2,37 @@
 
 <h2>Movies</h2>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>Title</th>
-            <th>Duration</th>
-            <th>Production Company</th>
-            <!-- Додайте інші колонки за потреби -->
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
+@if (Model != null && Model.Any())
+{
+    <table class="table">
+        <thead>
             <tr>
-                <td>@Html.DisplayFor(modelItem => item.Title)</td>
-                <td>@Html.DisplayFor(modelItem => item.Duration)</td>
-                <td>@Html.DisplayFor(modelItem => item.ProductionCompany)</td>
-                <!-- Додайте інші поля за потреби -->
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { id=item.MovieId }) |
-                    @Html.ActionLink("Details", "Details", new { id=item.MovieId }) |
-                    @Html.ActionLink("Delete", "Delete", new { id=item.MovieId })
-                </td>
+                <th>Title</th>
+                <th>Duration</th>
+                <th>Production Company</th>
+                <!-- Додайте інші колонки за потреби -->
+                <th></th>
             </tr>
-        }
-    </tbody>
-</table>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.Title)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Duration)</td>
+                    <td>@Html.DisplayFor(modelItem => item.ProductionCompany)</td>
+                    <!-- Додайте інші поля за потреби -->
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id=item.MovieId }) |
+                        @Html.ActionLink("Details", "Details", new { id=item.MovieId }) |
+                        @Html.ActionLink("Delete", "Delete", new { id=item.MovieId })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No movies available.</p>
+}

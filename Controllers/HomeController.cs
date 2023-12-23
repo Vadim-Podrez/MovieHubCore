@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using MovieHubCore.Domain;
 using MovieHubCore.Models;
 using System.Diagnostics;
 
@@ -6,16 +8,17 @@ namespace MovieHubCore.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly CinemaDbContext _context;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(CinemaDbContext context)
         {
-            _logger = logger;
+            _context = context;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var movies = await _context.Movies.ToListAsync();
+            return View(movies);
         }
 
         public IActionResult Privacy()
