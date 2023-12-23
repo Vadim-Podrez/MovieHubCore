@@ -20,8 +20,10 @@ namespace MovieHubCore
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-            // Додайте інші сервіси
+            services.AddDbContext<CinemaDbContext>(options =>
+                options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
         }
+
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {

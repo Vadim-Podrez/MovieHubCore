@@ -1,3 +1,6 @@
+using Microsoft.EntityFrameworkCore;
+using MovieHubCore.Domain;
+
 namespace MovieHubCore
 {
     public class Program
@@ -6,13 +9,13 @@ namespace MovieHubCore
         {
             var builder = WebApplication.CreateBuilder(args);
 
+            builder.Services.AddControllersWithViews();
+            builder.Services.AddDbContext<CinemaDbContext>(options =>
+                options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
+
             // Додайте налаштування логування, якщо потрібно
             builder.Logging.ClearProviders();
             builder.Logging.AddConsole();
-
-            // Додайте сервіси до контейнера
-            builder.Services.AddControllersWithViews();
-            // Додайте інші необхідні сервіси
 
             var app = builder.Build();
 
