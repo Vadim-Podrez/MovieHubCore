@@ -6,24 +6,26 @@ namespace MovieHubCore
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
+            // Додайте налаштування логування, якщо потрібно
+            builder.Logging.ClearProviders();
+            builder.Logging.AddConsole();
+
+            // Додайте сервіси до контейнера
             builder.Services.AddControllersWithViews();
+            // Додайте інші необхідні сервіси
 
             var app = builder.Build();
 
-            // Configure the HTTP request pipeline.
+            // Налаштуйте HTTP запити
             if (!app.Environment.IsDevelopment())
             {
                 app.UseExceptionHandler("/Home/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
             app.UseRouting();
-
             app.UseAuthorization();
 
             app.MapControllerRoute(
@@ -31,6 +33,7 @@ namespace MovieHubCore
                 pattern: "{controller=Home}/{action=Index}/{id?}");
 
             app.Run();
+
         }
     }
 }
