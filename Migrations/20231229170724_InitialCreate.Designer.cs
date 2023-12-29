@@ -11,13 +11,13 @@ using MovieHubCore.Domain;
 namespace MovieHubCore.Migrations
 {
     [DbContext(typeof(CinemaDbContext))]
-    [Migration("20231223162719_InitialCreate")]
+    [Migration("20231229170724_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
-            modelBuilder.HasAnnotation("ProductVersion", "6.0.25");
+            modelBuilder.HasAnnotation("ProductVersion", "6.0.0");
 
             modelBuilder.Entity("MovieHubCore.Models.Employee", b =>
                 {
