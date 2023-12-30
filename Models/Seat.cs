@@ -9,8 +9,9 @@
         public int SeatNumber { get; set; }
         public bool IsOccupied { get; set; }
         public int EmployeeId { get; set; }
-
         public Employee Employee { get; set; }
+
+        public Repertoire Session { get; set; } // Відносина з сеансом
     }
 
 }

@@ -1,5 +1,39 @@
 ﻿@model IEnumerable<MovieHubCore.Models.Movie>
 
+@{
+    ViewBag.Title = "Movie List";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Duration</th>
+            <th>Genre</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var movie in Model)
+        {
+            <tr>
+                <td>@movie.Title</td>
+                <td>@movie.Duration</td>
+                <td>@movie.Genre.GenreName</td>
+                <td>
+                    <a href="/Movies/Details/@movie.MovieId" class="btn btn-info">Details</a>
+                    <a href="/Movies/Edit/@movie.MovieId" class="btn btn-primary">Edit</a>
+                    <a href="/Movies/Delete/@movie.MovieId" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@* @model IEnumerable<MovieHubCore.Models.Movie>
+
 <h2>Movies</h2>
 
 @if (Model != null && Model.Any())
@@ -36,3 +70,35 @@ else
 {
     <p>No movies available.</p>
 }
+
+---
+
+@model IEnumerable<MovieHubCore.Models.Movie>
+
+<h2>Movies</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.ActionLink("Title", "Index", new { sortOrder = ViewBag.TitleSortParm })
+            </th>
+            <th>
+                @Html.ActionLink("Duration", "Index", new { sortOrder = ViewBag.DurationSortParm })
+            </th>
+            <!-- Додайте інші колонки за потреби -->
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.Title)</td>
+                <td>@Html.DisplayFor(modelItem => item.Duration)</td>
+                <!-- Додайте інші поля за потреби -->
+            </tr>
+        }
+    </tbody>
+</table>
+ *@
+

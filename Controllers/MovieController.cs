@@ -15,10 +15,33 @@ namespace MovieHubCore.Controllers
             _context = context;
         }
 
+
         // GET: Movies
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string sortOrder)
         {
-            return View(await _context.Movies.ToListAsync());
+            ViewData["TitleSortParm"] = sortOrder == "Title" ? "title_desc" : "Title";
+            ViewData["DurationSortParm"] = sortOrder == "Duration" ? "duration_desc" : "Duration";
+
+            var movies = from m in _context.Movies
+                         select m;
+
+            switch (sortOrder)
+            {
+                case "title_desc":
+                    movies = movies.OrderByDescending(m => m.Title);
+                    break;
+                case "Duration":
+                    movies = movies.OrderBy(m => m.Duration);
+                    break;
+                case "duration_desc":
+                    movies = movies.OrderByDescending(m => m.Duration);
+                    break;
+                default:
+                    movies = movies.OrderBy(m => m.Title);
+                    break;
+            }
+
+            return View(await movies.AsNoTracking().ToListAsync());
         }
 
         // GET: Movies/Details/5

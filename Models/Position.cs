@@ -10,6 +10,8 @@
         public decimal Salary { get; set; }
         public string Responsibilities { get; set; }
         public string Requirements { get; set; }
+
+        public ICollection<Employee> Employees { get; set; } // Відносина зі співробітниками
     }
 
 }

@@ -11,6 +11,9 @@ namespace MovieHubCore.Models
         public DateTime Date { get; set; }
         public TimeSpan StartTime { get; set; }
         public decimal Price { get; set; }
+        public Movie Movie { get; set; } // Відносина з фільмом
+
+        // public int MovieId { get; set; } // Додаткове поле
     }
 
 }
