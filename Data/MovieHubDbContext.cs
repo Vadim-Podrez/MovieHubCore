@@ -35,6 +35,11 @@ namespace MovieHubCore.Domain
                 .WithMany(g => g.Movies)
                 .HasForeignKey(m => m.GenreId);
 
+            modelBuilder.Entity<Repertoire>()
+            .HasMany(r => r.Seats)
+            .WithOne(s => s.Session)
+            .HasForeignKey(s => s.SessionId);
+
             modelBuilder.Entity<Seat>()
                 .HasOne(s => s.Employee)
                 .WithMany()
