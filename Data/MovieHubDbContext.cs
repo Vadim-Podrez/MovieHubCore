@@ -27,12 +27,12 @@ namespace MovieHubCore.Domain
             // Встановлення зв'язків між таблицями
             modelBuilder.Entity<Employee>()
                 .HasOne(e => e.Position)
-                .WithMany()
+                .WithMany(p => p.Employees)
                 .HasForeignKey(e => e.PositionId);
 
             modelBuilder.Entity<Movie>()
                 .HasOne(m => m.Genre)
-                .WithMany()
+                .WithMany(g => g.Movies)
                 .HasForeignKey(m => m.GenreId);
 
             modelBuilder.Entity<Seat>()
