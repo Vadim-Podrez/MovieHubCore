@@ -15,9 +15,18 @@ namespace MovieHubCore.Controllers
             _context = context;
         }
 
-        public async Task<IActionResult> Index()
+        /*public async Task<IActionResult> Index()
         {
             var movies = await _context.Movies.ToListAsync();
+            return View(movies);
+        }*/
+
+        public async Task<IActionResult> Index()
+        {
+            // Використання Eager Loading для завантаження жанрів
+            var movies = await _context.Movies
+                                      .Include(m => m.Genre) // Додавання Include для Genre
+                                      .ToListAsync();
             return View(movies);
         }
 
